@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "CodeLab Due Date Tracker",
+    "description": "Tracks User Due Dates",
+    "version": "1.0",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*/*"],
+            "css": ["popup.css"]
+        }
+    ],
+    "permissions": [
+        "identity"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval' https://accounts.google.com/gsi/client 'unsafe-inline'; object-src 'self'"
+  }

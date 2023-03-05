@@ -1,0 +1,60 @@
+name: Linter CI
+
+on:
+# Run on pull requests
+  pull_request:
+    branches:
+      - master
+      - main
+      - dev
+
+jobs:
+  lint-spawn-frontend:
+    name: Linter Spawn - Frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linter - Frontend
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          check_name: Linter - Frontend
+          eslint_dir: frontend
+  
+  lint-spawn-backend:
+    name: Linter Spawn - Backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linter - Backend
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          check_name: Linter - Backend
+          eslint_dir: backend
